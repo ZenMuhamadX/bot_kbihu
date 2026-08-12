@@ -1,0 +1,20 @@
+services:
+  bot-haji:
+    # Meminta Docker untuk mem-build Dockerfile yang ada di folder ini
+    build: .
+
+    # Memberi nama container agar mudah dicek
+    container_name: bot_rekap_haji
+
+    # Jika bot crash atau VM Proxmox restart, Docker akan otomatis menyalakan bot ini lagi
+    restart: always
+
+    # Docker akan otomatis membaca semua isi file .env kamu
+    env_file:
+      - .env
+
+    # KUNCI UTAMA LEARNING: Menghubungkan folder luar (VM Debian) ke dalam Docker
+    # Kiri = Jalur folder di VM Debian (yang nyambung ke Synology)
+    # Kanan = Jalur folder yang akan dibaca oleh kode Bot di dalam Docker
+    volumes:
+      - /mnt/botRekapHaji:/mnt/botRekapHaji
